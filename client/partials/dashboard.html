@@ -1,0 +1,23 @@
+
+<div ng-init='UC.session()'>
+	<h1>Hello, {{UC.current_user.first_name}}</h1>
+	<a href="#!/addQuestion">Add a question</a>
+	<button ng-click="UC.logout()">Logout</button>
+	<div>
+		Search Questions:<input type="text" ng-model="filter_questions">
+		<table ng-controller="QuestionsController as QC">
+			<tr ng-init="QC.index()">
+				<th>Question</th>
+				<th>Answers</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="question in QC.questions | orderBy:'content' |filter:filter_questions">
+				<td>{{question.content}}</td>
+				<td></td>
+				<td><a href="#!/answerQuestion/{{question._id}}">Answer</a></td>
+				<td><a href="#!/showQuestion/{{question._id}}">Show</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+	

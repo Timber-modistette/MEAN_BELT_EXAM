@@ -1,0 +1,13 @@
+<div>
+	<h1>Add a Question</h1>
+	<form ng-submit="QC.createQuestion(QC.newQuestion)">
+		<div>
+			<label>Question: <input type="text" ng-model="QC.newQuestion.content"></label>
+		</div>
+		<div>
+			<label>Description: <input type="text" ng-model="QC.newQuestion.description"></label>
+		</div>
+		<input type="submit" name="add_question_button">
+		<button>Cancel</button>
+	</form>
+</div>

@@ -1,0 +1,14 @@
+<div ng-init="QC.showQuestion()">
+	<div>
+		<a href="#!/answerQuestion/{{QC.question._id}}">answer this question</a>
+		<button ng-click="UC.logout()">Logout</button>
+		<h1>{{QC.question.content}}</h1>
+		<h3>{{QC.question.description}}</h3>
+		<p><button ng-click="QC.updateLikes()">Likes</button> {{QC.question.likes.count}}</p>
+		<div ng-repeat="x in QC.question.answers">
+			<p>{{x.user.first_name}} answered:</p>
+			<p>Content: {{x.content}}</p>
+			<p>Description: {{x.description}}</p>
+		</div>
+	</div>
+</div>
