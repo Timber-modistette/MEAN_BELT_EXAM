@@ -112,13 +112,13 @@ module.exports = {
 			}
 			return res.json(question)
 		})
+	},
+	destroy: function(req, res){
+		Question.findByIdAndRemove(req.params.id, function(err,question){
+			if(err){
+				return res.json(err)
+			}
+			return res.json(question)
+		})
 	}
-	// destroy: function(req, res){
-	// 	Question.findByIdAndRemove(req.params.id, function(err,question){
-	// 		if(err){
-	// 			return res.json(err)
-	// 		}
-	// 		return res.json(question)
-	// 	})
-	// }
 };

@@ -15,7 +15,7 @@ module.exports = function(app){
 	app.post('/questions', Questions.create)
 	app.get('/questions',Questions.index)
 	app.get('/questions/:id', Questions.show)
-	// app.delete('/questions/:id',Questions.destroy)
+	app.delete('/questions/:id',Questions.destroy)
 	
 	//////////options routes////////////////
 	app.put('/options/:id',Options.updateVotes)
