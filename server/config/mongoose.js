@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/topics_project');
+mongoose.connect('mongodb://localhost/last_exam');
 mongoose.Promise = global.Promise;
 
 var models_path = __dirname + "/../models";

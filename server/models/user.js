@@ -40,15 +40,9 @@ var UserSchema = new mongoose.Schema({
 		required: [true, "password is required"]
 	},
 	questions:[{
-		type:mongoose.Schema.Types.ObjectId,
-		ref:'Question'
-	}],
-	answers:[{
 		type: mongoose.Schema.Types.ObjectId,
-		ref:'Answer'
-	}],
-
-
+		ref:'Question'
+	}]
 },{timestamps:true})
 
 UserSchema.methods.hashPassword = function(password){

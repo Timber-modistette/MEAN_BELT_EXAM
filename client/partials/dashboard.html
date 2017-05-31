@@ -1,21 +1,22 @@
 
 <div ng-init='UC.session()'>
-	<h1>Hello, {{UC.current_user.first_name}}</h1>
-	<a href="#!/addQuestion">Add a question</a>
+	<h1>Current polls</h1>
+	<a href="#!/addQuestion">Create new Survey question</a>
 	<button ng-click="UC.logout()">Logout</button>
 	<div>
 		Search Questions:<input type="text" ng-model="filter_questions">
 		<table ng-controller="QuestionsController as QC">
 			<tr ng-init="QC.index()">
-				<th>Question</th>
-				<th>Answers</th>
+				<th>Name</th>
+				<th>Survery Question</th>
+				<th>Date Posted</th>
 				<th>Action</th>
 			</tr>
 			<tr ng-repeat="question in QC.questions | orderBy:'content' |filter:filter_questions">
-				<td>{{question.content}}</td>
-				<td></td>
-				<td><a href="#!/answerQuestion/{{question._id}}">Answer</a></td>
-				<td><a href="#!/showQuestion/{{question._id}}">Show</a></td>
+				<td>{{question.user.user_name}}</td>
+				<td><a href="#!/showQuestion/{{question._id}}">{{question.content}}</a></td>
+				<td>{{question.createdAt}}</td>
+				<td><a  ng-if="UC.current_user._id == question.user._id" ng-click="QC.delete(question._id)" href="">Delete</a></td>
 			</tr>
 		</table>
 	</div>

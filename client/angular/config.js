@@ -18,9 +18,9 @@ app.config(function($routeProvider){
 		templateUrl: 'partials/show_question.html',
 		controller: 'QuestionsController as QC'
 	})
-	.when('/answerQuestion/:id',{
-		templateUrl: 'partials/answer_question.html',
-		controller: 'QuestionsController as QC'
-	})
+	// .when('/deleteQuestion/:id',{
+	// 	templateUrl: 'partials/answer_question.html',
+	// 	controller: 'QuestionsController as QC'
+	// })
 	.otherwise({redirectTo:'/'})
 })

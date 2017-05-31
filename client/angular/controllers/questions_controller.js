@@ -1,21 +1,30 @@
-app.controller('QuestionsController', function(UserFactory,AnswerFactory,QuestionFactory, $location,$routeParams){
+app.controller('QuestionsController', function(UserFactory,OptionFactory,QuestionFactory, $location,$routeParams){
 	var self = this;
 	self.questions = [];
 	self.question = [];
 
-	self.createQuestion = function(newQuestion){
+	self.createQuestion = function(newQuestion, option1,option2,option3,option4){
 		self.new_question_errors = [];
+		if(!newQuestion){
+			newQuestion = {};
+		}
+		var list = [option1,option2,option3,option4]
+		console.log(list)
+		newQuestion.myOptions = list;
 		UserFactory.session(function(user){
 			newQuestion.user = user._id;
 			QuestionFactory.createQuestion(newQuestion, function(res){
-				// console.log(res)
+				console.log(res)
 				if(res.data.errors){
 					for(key in res.data.errors){
 						var error = res.data.errors[key]
 						self.new_question_errors.push(error.message)
 					}
 				}
-				$location.url('/dashboard')
+				else{
+					$location.url('/dashboard')
+					
+				}
 				
 			})
 		})
@@ -33,31 +42,20 @@ app.controller('QuestionsController', function(UserFactory,AnswerFactory,Questio
 			console.log(res)
 		})
 	}
-	self.createAnswer = function(newAnswer){
-		// console.log(newAnswer)
-		self.new_answer_errors = {};
-		newAnswer.question = $routeParams.id
-		UserFactory.session(function(user){
-			newAnswer.user = user._id;
-			AnswerFactory.createAnswer(newAnswer, function(res){
-				// console.log(res)
-				self.newComment = {};
-				if(res.data.errors){
-					self.new_answer_errors= [];
-					for(key in res.data.errors){
-						var error = res.data.errors[key];
-						self.new_answer_errors.push(error.message);
-					}
-				} 
-				$location.url('dashboard')
-				
-			})
+	self.updateVotes = function(optionid){
+		// console.log(optionid)
+		OptionFactory.updateVotes(optionid,function(res){
+			self.showQuestion()
 		})
-		
 	}
-	self.updateLikes = function(){
-		QuestionFactory.updateLikes($routeParams.id,function(res){
+	self.cancel = function(){
+		$location.url('dashboard')
+	}
+	self.delete = function(questionid){
+		// console.log(questionid)
+		QuestionFactory.delete(questionid, function(res){
 			console.log(res)
+			self.index()
 		})
 	}
 

@@ -8,26 +8,14 @@ var QuestionSchema = new mongoose.Schema({
 	},
 	content:{
 		type: String,
-		required: [true, 'Name field cannot be blank'],
-		minlength: [10, "Question cannot be less than 10 characters"]
+		required: [true, 'Question field cannot be blank'],
+		minlength: [8, " survey Question cannot be less than 8 characters"]
 	},
-	description: {
-		type: String,
-	},
-	likes: {
-		count: {
-			type: Number,
-			default: 0
-		},
-		users: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
-		}]
-	},
-	answers:[{
+	options:[{
 		type:mongoose.Schema.Types.ObjectId,
-		ref:'Answer'
+		ref:'Option'
 	}]
+	
 }, {timestamps: true})
 
 mongoose.model('Question', QuestionSchema);

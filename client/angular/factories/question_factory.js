@@ -14,6 +14,9 @@ app.factory('QuestionFactory', function($http){
 	factory.updateLikes = function(id,callback){
 		$http.put('/questions/'+id).then(callback)
 	}
+	factory.delete = function(questionid,callback){
+		$http.delete('/questions/'+questionid).then(callback)
+	}	
 
 	return factory;
 })

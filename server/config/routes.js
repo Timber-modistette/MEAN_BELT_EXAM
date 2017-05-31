@@ -1,8 +1,9 @@
 var Users = require('../controllers/users');
 var Questions = require('../controllers/questions')
-var Answers = require('../controllers/answers')
-//users routes
+var Options = require('../controllers/options')
+
 module.exports = function(app){
+	//////////user routes//////////////
 	app.get('/users',Users.index);
 	app.post('/users',Users.create);
 	app.post('/sessions',Users.login);
@@ -14,8 +15,9 @@ module.exports = function(app){
 	app.post('/questions', Questions.create)
 	app.get('/questions',Questions.index)
 	app.get('/questions/:id', Questions.show)
-	app.put('/questions/:id', Questions.updateLikes)
-
-	app.post('/answers', Answers.create);
+	// app.delete('/questions/:id',Questions.destroy)
+	
+	//////////options routes////////////////
+	app.put('/options/:id',Options.updateVotes)
 
 }

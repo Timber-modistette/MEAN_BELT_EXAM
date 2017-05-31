@@ -1,14 +1,43 @@
-<div ng-init="QC.showQuestion()">
-	<div>
-		<a href="#!/answerQuestion/{{QC.question._id}}">answer this question</a>
+<div ng-init="QC.showQuestion()", ng-controller="UsersController as UC">
+	<div ng-init="UC.session()">
+		<a href="#!/dashboard">Back to polls</a>
 		<button ng-click="UC.logout()">Logout</button>
 		<h1>{{QC.question.content}}</h1>
-		<h3>{{QC.question.description}}</h3>
-		<p><button ng-click="QC.updateLikes()">Likes</button> {{QC.question.likes.count}}</p>
-		<div ng-repeat="x in QC.question.answers">
-			<p>{{x.user.first_name}} answered:</p>
-			<p>Content: {{x.content}}</p>
-			<p>Description: {{x.description}}</p>
+		<table>
+			<tr>
+				<th>Option</th>
+				<th>Current Count of Votes</th>
+				<th>Action</th>
+			</tr>
+			<tr>
+				<td>{{QC.question.options[0].content}}</td>
+				<td>{{QC.question.options[0].votes.count}}</td>
+				<td><button ng-click="QC.updateVotes(QC.question.options[0]._id)">Vote</button></td>
+			</tr>
+			<tr>
+				<td>{{QC.question.options[1].content}}</td>
+				<td>{{QC.question.options[1].votes.count}}</td>
+				<td><button ng-click="QC.updateVotes(QC.question.options[1]._id)">Vote</button></td>
+			</tr>
+			<tr>
+				<td>{{QC.question.options[2].content}}</td>
+				<td>{{QC.question.options[2].votes.count}}</td>
+				<td><button ng-click="QC.updateVotes(QC.question.options[2]._id)">Vote</button></td>
+
+			</tr>
+			<tr>
+				<td>{{QC.question.options[3].content}}</td>
+				<td>{{QC.question.options[3].votes.count}}</td>
+				<td><button ng-click="QC.updateVotes(QC.question.options[3]._id)">Vote</button></td>
+
+			</tr>
+		</table>
+		<div ng-repeat="answer in QC.question.answers">
+		<p><button ng-if="answer.likes.users.indexOf(UC.current_user._id) == -1" ng-click="QC.updateLikes(answer._id, UC.current_user._id)">Like</button></p>
+			<p>Likes: {{answer.likes.count}}</p>
+			<p>{{answer.user.first_name}} answered:</p>
+			<p>Content: {{answer.content}}</p>
+			<p>Description: {{answer.description}}</p>
 		</div>
 	</div>
 </div>
